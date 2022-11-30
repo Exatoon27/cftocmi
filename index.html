@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ColorFun -> CMI Itemname</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ThirdParty/Toast.css" />
+    <link href="ThirdParty/bootstrap.css" rel="stylesheet">
+  </head>
+  <body>
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-7 col-lg-5">
+            <div class="card-wrap p-4 p-md-5">
+              <div class="container-sm text-center">
+                <h1 class="fs-2 text-center text-warning mb-3">CMI Itemname<br />command generator</h1>
+                <p class="mb-3">Here you can put your code from <a class="text-decoration-none" href="https://colorize.fun/en/minecraft">Colorize Fun</a> and convert it to <a class="text-decoration-none" href="https://www.spigotmc.org/resources/cmi-298-commands-insane-kits-portals-essentials-economy-mysql-sqlite-much-more.3742/">CMI</a> itemname command</p>
+                <hr class="solid">
+                <div> 
+                  <label for="input" class="form-label">JSON Input</label>
+                  <input id="input" class="form-control mb-4" type="text" placeholder="Put your json here"/>
+                  <button class="form-control btn btn-primary rounded submit px-3 mb-4" onclick="convertir()">Convert</button>
+                  <input id="commandOutput" class="form-control" type="text" placeholder="Output"/>
+                </div>
+              </div>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="script.js"></script>
+    <script src="copyApi.js"></script>
+    <script src="ThirdParty/Toast.js"></script>
+    <script src="ThirdParty/bootstrap.js"></script>
+  </body>
+</html>

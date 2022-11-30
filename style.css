@@ -1,0 +1,24 @@
+body {
+  background-image: linear-gradient(45deg, transparent 20%, #C8FFD4 25%, transparent 25%), 
+                    linear-gradient(-45deg, transparent 75%, #B1AFFF 80%, transparent 0),
+                    radial-gradient(#B8E8FC 2px, transparent 0);
+  background-size: 30px 30px, 30px 30px;
+
+}
+
+.row{
+  height: 100vh;
+}
+
+hr.solid {
+  border-top: 3px solid #bbb;
+}
+
+.card-wrap {
+  position: relative;
+  background: #f6f8fc;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+}
