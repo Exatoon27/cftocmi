@@ -1,86 +1,60 @@
-function convertir() {
-  try {
-    var json = JSON.parse(document.getElementById("input").value);
-  } catch (error) {
-    new Toast({
-      message: "Invalid JSON! 🤨",
-      type: "danger",
-    });
-    return
-  }
-  var styledText = "/itemname ";
-  for (itemN in json) {
-    var convWord = "";
-    var item = json[itemN];
-    var text = item.text;
-    var color = item.color;
-
-    if (text === "") {
-      continue;
-    }
-    if (color) {
-      if (color.startsWith("#")) {
-        convWord += "{" + color + "}";
-      } else {
-        convWord += getColor(color);
-      }
-    }else{
-        convWord += "&r"
-    }
-    if (item.bold) {
-      convWord += "&l";
-    }
-    if (item.italic) {
-      convWord += "&o";
-    }
-    if (item.underlined) {
-      convWord += "&n";
-    }
-    convWord += text;
-
-    styledText += convWord;
-  }
-
-  document.getElementById("commandOutput").value = styledText;
-  document.getElementById("input").value = "";
-  document.getElementById("input").focus();
-  copyTextToClipboard(styledText);
+const colors = {
+  "yellow": "&e",
+  "gold": "&6",
+  "red": "&c",
+  "dark_red": "&4",
+  "light_purple": "&d",
+  "dark_purple": "&5",
+  "blue": "&9",
+  "dark_blue": "&1",
+  "dark_aqua": "&3",
+  "aqua": "&b",
+  "dark_green": "&2",
+  "green": "&a",
+  "dark_gray": "&8",
+  "gray": "&7",
+  "black": "&0",
+  "white": "&f",
 }
 
 function getColor(color) {
-  switch (color) {
-    case "yellow":
-      return "&e";
-    case "gold":
-      return "&6";
-    case "red":
-      return "&c";
-    case "dark_red":
-      return "&4";
-    case "light_purple":
-      return "&d";
-    case "dark_purple":
-      return "&5";
-    case "blue":
-      return "&9";
-    case "dark_blue":
-      return "&1";
-    case "dark_aqua":
-      return "&3";
-    case "aqua":
-      return "&b";
-    case "dark_green":
-      return "&2";
-    case "green":
-      return "&a";
-    case "dark_gray":
-      return "&8";
-    case "gray":
-      return "&7";
-    case "black":
-      return "&0";
-    	case "white":
-      return "&f";
-  }
+  return colors[color] || "&r"
 }
-document.getElementById("input").focus();
+
+function convertir() {
+  let json;
+  try {
+    json = JSON.parse(document.getElementById("input").value);
+  } catch (error) {
+    new Toast({ message: "Invalid JSON! 🤨", type: "danger" });
+    return
+  }
+  var styledText = "/itemname ";
+
+  for (const item of Object.values(json)) {
+    if (!item.text) continue;
+    let convWord = "";
+
+    if (item.color) {
+      convWord += item.color.startsWith("#") ? `{${item.color}}` : getColor(item.color);
+    } else {
+      convWord += "&r";
+    }
+
+    if (item.bold) convWord += "&l";
+    if (item.italic) convWord += "&o";
+    if (item.underlined) convWord += "&n";
+
+    convWord += item.text;
+    styledText += convWord;
+  }
+
+  const output = document.getElementById("commandOutput");
+  const input = document.getElementById("input");
+
+  output.value = styledText;
+  input.value = "";
+  input.focus();
+
+  copyTextToClipboard(styledText);
+}

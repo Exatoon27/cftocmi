@@ -1,23 +1,19 @@
 function fallbackCopyTextToClipboard(text) {
-  var output = document.getElementById("commandOutput");
+  const output = document.getElementById("commandOutput");
 
   output.focus();
   output.select();
 
   try {
-    var successful = document.execCommand("copy");
-    var msg = successful
-      ? "Command copied to clipboard! 📋"
-      : "Unable to copy the command! 😭";
+    const successful = document.execCommand("copy");
     new Toast({
-      message: msg,
-      type: "success",
+      message: successful
+        ? "Command copied to clipboard! 📋"
+        : "Unable to copy the command! 😭",
+      type: successful ? "success" : "danger",
     });
   } catch (err) {
-    new Toast({
-      message: "Unable to copy the command! 😭",
-      type: "danger",
-    });
+    new Toast({ message: "Unable to copy the command! 😭", type: "danger" });
   }
 }
 function copyTextToClipboard(text) {
@@ -25,18 +21,11 @@ function copyTextToClipboard(text) {
     fallbackCopyTextToClipboard(text);
     return;
   }
-  navigator.clipboard.writeText(text).then(
-    function () {
-      new Toast({
-        message: "Command copied to clipboard! 📋",
-        type: "success",
-      });
-    },
-    function (err) {
-      new Toast({
-        message: "Unable to copy the command! 😭",
-        type: "danger",
-      });
-    }
-  );
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      new Toast({ message: "Command copied to clipboard! 📋", type: "success" });
+    })
+    .catch(() => {
+      new Toast({ message: "Unable to copy the command! 😭", type: "danger" });
+    });
 }
